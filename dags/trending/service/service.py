@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime,timedelta
-
+from time import time
 import io
 from trending.config.config import MinIO_S3_client
 
@@ -11,6 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def extract_trending_youtube():
+    
     def upload_df_to_s3(df:pd.DataFrame):
         current_date = datetime.today().strftime("%Y_%m_%d")
         current_time = (datetime.now() + timedelta(hours=7)).strftime("%Hh_%Mm")
@@ -36,7 +37,7 @@ def extract_trending_youtube():
     chrome_options.add_argument('--disable-gpu')
     # driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
     driver = webdriver.Remote("http://selenium:4444/wd/hub",desired_capabilities=DesiredCapabilities.CHROME,options=chrome_options)
-
+    start_time = time()
     try:
         df = extract_trending_data(driver=driver)
         # print(df)
@@ -45,5 +46,8 @@ def extract_trending_youtube():
 
     except Exception as e:
         print(e)
+    end_time = time()
+    duration = end_time - start_time
+    print(f'Duration: {duration} s')
 
 # extract_trending_youtube()

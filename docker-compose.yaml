@@ -35,9 +35,9 @@ services:
   postgres:
     image: postgres:13
     environment:
-      POSTGRES_USER: airflow
-      POSTGRES_PASSWORD: airflow
-      POSTGRES_DB: airflow
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
     healthcheck:
@@ -62,8 +62,8 @@ services:
     volumes:
       - .docker/minio:/data
     environment:
-      MINIO_ROOT_USER: khanhlq10  
-      MINIO_ROOT_PASSWORD: khanhlq10
+      MINIO_ROOT_USER: "${MINIO_ROOT_USER}"
+      MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
     command: server --console-address ":9001" /data
     restart: unless-stopped
 
