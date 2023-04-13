@@ -33,19 +33,7 @@ def extract_trending_data(driver: webdriver.Chrome = None) -> pd.DataFrame:
     driver.implicitly_wait(10)
     driver.set_page_load_timeout(60)
 
-    # driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36'})
-    # print(driver.execute_script("return navigator.userAgent;"))               
-
     driver.get('https://www.youtube.com/feed/trending')
-    # menu = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="guide-icon"]')))
-    # menu.click()
-
-    # print()
-    # trending = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//a[@title="Trending"]')))
-    # trending.click()
-
-    # driver.find_element(By.XPATH,'//a[@title="Trending"]').click()
-    # sleep(3)
 
     # tab = driver.find_element(By.XPATH,'//*[@class="tab-title style-scope ytd-c4-tabbed-header-renderer"]')
     tabs = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, '//*[@class="tab-title style-scope ytd-c4-tabbed-header-renderer"]')))
@@ -108,8 +96,3 @@ def extract_data_by_option(tab:WebElement,driver:WebElement):
         x+=1
         rows.append(row) 
     return rows
-    # df = pd.DataFrame(rows)
-    # print(df)
-    
-# extract_trending_data()
-# extract_data_by_option()

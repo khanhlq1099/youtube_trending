@@ -2,9 +2,7 @@ from airflow import DAG
 from datetime import datetime, timedelta
 from airflow.operators.python import PythonOperator
 
-# from trending.extract.crawler import extract_trending_data 
 from trending.service.service import extract_trending_youtube
-
 
 default_args ={
     'owner': 'kpim'

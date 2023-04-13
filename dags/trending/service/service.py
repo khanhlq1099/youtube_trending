@@ -49,5 +49,3 @@ def extract_trending_youtube():
     end_time = time()
     duration = end_time - start_time
     print(f'Duration: {duration} s')
-
-# extract_trending_youtube()
