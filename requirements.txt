@@ -1,8 +1,6 @@
 pandas
-numpy
 selenium
 requests
 webdriver_manager
-lxml
 bs4
 boto3

@@ -11,7 +11,7 @@ from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 def extract_trending_youtube():
-    
+    # Upload data frame to MinIO S3
     def upload_df_to_s3(df:pd.DataFrame):
         current_date = datetime.today().strftime("%Y_%m_%d")
         current_time = (datetime.now() + timedelta(hours=7)).strftime("%Hh_%Mm")
@@ -27,6 +27,7 @@ def extract_trending_youtube():
             else:
                 print(f"Unsuccessful S3 put_object response. Status - {status}")
 
+    # Set up Driver
     chrome_options = webdriver.ChromeOptions()
     # chrome_options.binary_location = "/Users/lamquockhanh10/VSCodeProjects/kpim_stock/stock_etl/stock/lib/chromedriver"
     chrome_options.add_argument("--headless")
@@ -37,6 +38,8 @@ def extract_trending_youtube():
     chrome_options.add_argument('--disable-gpu')
     # driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
     driver = webdriver.Remote("http://selenium:4444/wd/hub",desired_capabilities=DesiredCapabilities.CHROME,options=chrome_options)
+    
+    # Call function 
     start_time = time()
     try:
         df = extract_trending_data(driver=driver)
